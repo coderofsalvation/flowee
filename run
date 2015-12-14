@@ -1,0 +1,3 @@
+#!/bin/bash
+content="$(cat README.md | ./bashdown --html )"
+printf "$(node_modules/.bin/brown template.html package.json)" "$content" "$(date)" > index.html
