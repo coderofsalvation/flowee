@@ -1,3 +1,3 @@
 #!/bin/bash
-content="$(curl -L "https://raw.githubusercontent.com/coderofsalvation/flowee/master/README.md" | ./bashdown --html )"
+content="$(curl -L "https://raw.githubusercontent.com/coderofsalvation/flowee/master/README.md" | ./markdown )"
 printf "$(node_modules/.bin/brown template.html package.json)" "$content" "$(date)" > index.html

@@ -16,6 +16,27 @@
 <p>a <strong>very lightweight</strong> way to <strong>create api's</strong> using <em>nodejs</em>:</p>
 
 <h2>
+<a id="user-content-getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h2>
+
+<pre><code>$ npm install flowee
+</code></pre>
+
+<p>Create <code>server.js</code>:</p>
+
+<pre><code>var flowee = require('flowee')
+var model = require('./model.js');
+
+flowee.start(model, function(server, router) {
+  return server.listen(1337);
+});
+</code></pre>
+
+<p>See <a href="https://github.com/coderofsalvation/flowee/blob/master/test/model.js">model.js here</a></p>
+
+<pre><code>$ node server.js
+</code></pre>
+
+<h2>
 <a id="user-content-architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
 
 <p><a href="https://camo.githubusercontent.com/80e2d26fdea7eae50e497e06cce905cec52a720e/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f6469616772616d2e706e67" target="_blank"><img src="https://camo.githubusercontent.com/80e2d26fdea7eae50e497e06cce905cec52a720e/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f6469616772616d2e706e67" alt="" data-canonical-src="http://coderofsalvation.github.io/flowee/img/diagram.png" style="max-width:100%;"></a></p>
@@ -48,7 +69,7 @@ Flowee likes to focus on:</p>
 </ul>
 <hr>
 <center>
-  generated at Mon Dec 14 20:42:26 CET 2015
+  generated at Mon Dec 14 21:54:45 CET 2015
 </center>
 </body>
 </html>
