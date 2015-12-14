@@ -7,7 +7,7 @@ execHandle = (after) ->
 
 run = (command) ->
   (after) ->
-    console.log "RUNNING #{command}"
+    console.log 'RUNNING #{command}'
     exec command, execHandle after
 
 test = (callback) ->
@@ -19,8 +19,9 @@ test = (callback) ->
                                                          
   '''
   console.log woof
-  run( 'rm db/*.db 2>/dev/null; coffee --nodejs --harmony ./test/test.coffee' ) (code) ->
+  run( 'coffee --nodejs --harmony ./test/test.coffee' ) (code) ->
     process.exit code
 
 task 'test', 'Run all tests', ->
   test()
+            

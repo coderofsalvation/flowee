@@ -4,6 +4,23 @@
 
 a __very lightweight__ way to __create api's__ using _nodejs_:
 
+## Getting started
+
+    $ npm install flowee
+
+Create `server.js`:
+
+    var flowee = require('flowee')
+    var model = require('./model.js');
+  
+    flowee.start(model, function(server, router) {
+      return server.listen(1337);
+    });
+
+See [model.js here](https://github.com/coderofsalvation/flowee/blob/master/test/model.js)
+
+    $ node server.js
+
 ## Architecture
 
 ![](http://coderofsalvation.github.io/flowee/img/diagram.png)
