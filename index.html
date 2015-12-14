@@ -13,7 +13,7 @@
 
 <p><a href="https://camo.githubusercontent.com/60752b08637ed20755e1cef2ad44597775048016/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f666c6f7765652e706e67" target="_blank"><img src="https://camo.githubusercontent.com/60752b08637ed20755e1cef2ad44597775048016/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f666c6f7765652e706e67" alt="" data-canonical-src="http://coderofsalvation.github.io/flowee/img/flowee.png" style="max-width:100%;"></a></p>
 
-<p>a <strong>very lightweight</strong> way to <strong>create api's</strong> using <em>nodejs</em>:</p>
+<p>a <strong>lightweight</strong> way to <em>create JSONAPI-compatible api's_</em> using <em>nodejs</em>:</p>
 
 <h2>
 <a id="user-content-getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h2>
@@ -21,7 +21,8 @@
 <pre><code>$ npm install flowee
 </code></pre>
 
-<p>Create <code>server.js</code>:</p>
+<h4>
+<a id="user-content-create-serverjs" class="anchor" href="#create-serverjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create <code>server.js</code>:</h4>
 
 <pre><code>var flowee = require('flowee')
 var model = require('./model.js');
@@ -31,10 +32,14 @@ flowee.start(model, function(server, router) {
 });
 </code></pre>
 
-<p>See <a href="https://github.com/coderofsalvation/flowee/blob/master/test/model.js">model.js here</a></p>
+<p>( See <a href="https://github.com/coderofsalvation/flowee/blob/master/test/model.js">model.js here</a> )</p>
 
 <pre><code>$ node server.js
 </code></pre>
+
+<blockquote>
+<p>Voila! Now you have a server running with automatically mapped database entities (incl. <strong>many to many</strong> relations OHMY).</p>
+</blockquote>
 
 <h2>
 <a id="user-content-architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
@@ -44,13 +49,18 @@ flowee.start(model, function(server, router) {
 <p>click <a href="http://coderofsalvation.github.io/flowee/img/diagram.png" target="_blank">here</a> to see the fullscreen architecture</p>
 
 <ul>
-<li>built on the shoulders of <a href="http://fortunejs.com/">fortunejs</a> for automatic model&lt;-&gt;relational database mapping</li>
+<li>fast installation: core is +/- 10M</li>
+<li>built on the shoulders of <a href="http://fortunejs.com/">fortunejs</a> for automatic <strong>json 2 relational database</strong> mapping</li>
 <li>
 <a href="http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger">DDA</a>: design-driven api by using a json model </li>
-<li>SWAGGER v2 compatible json model</li>
+<li>
+<strong>SWAGGER v2</strong> compatible json model</li>
 <li>
 <a href="http://jsonapi.org/">JSONAPI v1</a> compatible</li>
-<li>middleware compatible: connect <a href="http://expressjs.com">express</a> and <a href="http://restify.com">restify</a> middleware modules from npm</li>
+<li>
+<strong>middleware compatible</strong>: connect <a href="http://expressjs.com">express</a> and <a href="http://restify.com">restify</a> middleware modules from npm</li>
+<li>by default <em>Flowee</em> runs out of the box using <strong>NeDB</strong>, a <strong>mongodb</strong>-ish disk-persistent memory db</li>
+<li>database adapter swappable with <a href="https://www.npmjs.com/package/fortune-mongodb">MongoDB</a>, <a href="https://www.npmjs.com/package/fortune-postgres">Postgres</a>, <a href="https://www.npmjs.com/package/fortune-redis">Redis</a> adapter</li>
 </ul>
 
 <h2>
@@ -61,7 +71,7 @@ Now imagine lightweight.
 Flowee likes to focus on:</p>
 
 <ul>
-<li>lightweight</li>
+<li>lightweight and fast to install</li>
 <li>json driven instead of frameworkspecific (file)conventions</li>
 <li>http framework agnostic</li>
 <li>allow re-usage of middleware from http frameworks like express/restify etc</li>
@@ -69,7 +79,7 @@ Flowee likes to focus on:</p>
 </ul>
 <hr>
 <center>
-  generated at Mon Dec 14 21:54:45 CET 2015
+  generated at Mon Dec 14 22:20:41 CET 2015
 </center>
 </body>
 </html>
