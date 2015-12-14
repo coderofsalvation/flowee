@@ -1,0 +1,6 @@
+#!/bin/bash
+        find -name "*.coffee" | grep -v node_modules | while read file; do
+          echo "compiling ${file/coffee$/js/g}";
+          #coffee -o lib -c "$file" ; git add "${file/coffee$/js/}";
+          coffee -c "$file" ; git add "${file/coffee$/js/}";
+        done

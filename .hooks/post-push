@@ -1,0 +1,8 @@
+#!/bin/bash
+[[ -d ../flowee.landingpage ]] && {
+  cd ../flowee.landingpage
+  ./run 
+  \git add index.html
+  \git commit -m "update docs" 
+  \git push origin gh-pages;
+}
