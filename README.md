@@ -1,4 +1,4 @@
-<img alt="" src=" alt="" src="http://coderofsalvation.github.io/flowee/img/flowee.png" style='width:50px'/>
+![](http://coderofsalvation.github.io/flowee/img/flowee.png)
 
 ## Flowee
 
@@ -12,7 +12,7 @@ Flowee is a very lightweight way to create api's:
 
 ## Architecture
 
-<img alt="" src=" src="http://coderofsalvation.github.io/flowee/img/diagram.png" style="border-radius:0 !important;height:auto;width:auto;max-height:auto !important">
+![](http://coderofsalvation.github.io/flowee/img/diagram.png)
 
 click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target="_blank">here</a> to see the fullscreen architecture
 
@@ -28,4 +28,4 @@ Flowee likes to focus on:
 * no fileconventions
 * http framework agnostic
 * allow re-usage of middleware from http frameworks like express/restify etc
-* build your own cli tools
+* no cli tools, just code: build and understand your own cli tools
