@@ -4,26 +4,6 @@
 
 a __lightweight__ way to _create JSONAPI-compatible api's__ using _nodejs_:
 
-## Getting started
-
-    $ npm install flowee
-    $ cp node_modules/flowee/test/model.js .
-
-#### Create `server.js`:
-
-    var flowee = require('flowee')
-    var model = require('./model.js');
-  
-    flowee.start(model, function(server, router) {
-      return server.listen(1337);
-    });
-
-( See [model.js here](https://github.com/coderofsalvation/flowee/blob/master/test/model.js) )
-
-    $ node server.js
-
-> Voila! Now you have a server running with automatically mapped database entities (incl. __many to many__ relations OHMY).
-
 ## Architecture
 
 ![](http://coderofsalvation.github.io/flowee/img/diagram.png)
@@ -38,6 +18,27 @@ click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target=
 * __middleware compatible__: connect [express](http://expressjs.com) and [restify](http://restify.com) middleware modules from npm
 * by default *Flowee* runs out of the box using __NeDB__, a __mongodb__-ish disk-persistent memory db
 * database adapter swappable with [MongoDB](https://www.npmjs.com/package/fortune-mongodb), [Postgres](https://www.npmjs.com/package/fortune-postgres), [Redis](https://www.npmjs.com/package/fortune-redis) adapter
+
+## Getting started
+
+    $ npm install flowee
+    $ cp node_modules/flowee/test/model.js .
+
+__Create `server.js`:__
+
+    var flowee = require('flowee')
+    var model = require('./model.js');
+  
+    flowee.start(model, function(server, router) {
+      return server.listen(1337);
+    });
+
+( See [model.js here](https://github.com/coderofsalvation/flowee/blob/master/test/model.js) )
+
+    $ node server.js
+
+> Voila! Now you have a server running with automatically mapped database entities (incl. __many to many__ relations OHMY).
+
 
 ## Howto: Database entities & relations
 
