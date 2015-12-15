@@ -1,6 +1,6 @@
 ## Flowee
 
-a __lightweight__ way to __create JSONAPI__-compatible api's using _nodejs_:
+a __lightweight__ way to __create JSONAPI__-compatible api's using _nodejs_ & _fortunejs_
 
 ![Build Status](https://travis-ci.org/coderofsalvation/flowee.svg?branch=master)
 
@@ -39,17 +39,21 @@ click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target=
 
 ## Features
 
+Built on the shoulders of [fortunejs](http://fortunejs.com/), which represents:
+
 * fast installation: core is +/- 10M
-* built on the shoulders of [fortunejs](http://fortunejs.com/) for automatic __json 2 relational database__ mapping
-* [DDA](http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger): design-driven api by using a json model 
+* a teaspoon of automatic __json 2 database__ mapping.
+* 5 liters of [JSONAPI v1](http://jsonapi.org/) compatible REST responses 
+* swappable database adapters like [MongoDB](https://www.npmjs.com/package/fortune-mongodb), [Postgres](https://www.npmjs.com/package/fortune-postgres), [Redis](https://www.npmjs.com/package/fortune-redis) adapter
+
+On top of that:
+
 * __SWAGGER v2__ compatible json model
-* [JSONAPI v1](http://jsonapi.org/) compatible
+* [DDA](http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger): design-driven api by using a json model 
 * __middleware compatible__: connect [express](http://expressjs.com) and [restify](http://restify.com) middleware modules from npm
-* by default *Flowee* runs out of the box using __NeDB__, a __mongodb__-ish disk-persistent memory db
-* database adapter swappable with [MongoDB](https://www.npmjs.com/package/fortune-mongodb), [Postgres](https://www.npmjs.com/package/fortune-postgres), [Redis](https://www.npmjs.com/package/fortune-redis) adapter
 
 
-## Why / Philosophy 
+## Philosophy 
 
 Take a look at [loopback](http://blog.jeffdouglas.com/2015/07/07/roll-your-own-api-vs-loopback), [meteor](http://meteor.com), [cleverstack](http://cleverstack.io). 
 Now imagine lightweight.

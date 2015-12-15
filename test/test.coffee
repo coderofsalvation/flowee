@@ -1,9 +1,10 @@
-fetch = require 'node-fetch'
-flowee = require './../index.coffee'
-model  = require './model.coffee'
-nedb   = require 'fortune-nedb'
-name = "foo-"+new Date()
-t      = require './tester.coffee'
+fetch        = require 'node-fetch'
+flowee       = require './../index.coffee'
+model        = require './model.coffee'
+nedb         = require 'fortune-nedb'
+responsetime = require 'response-time'
+name         = "foo-"+new Date()
+t            = require './tester.coffee'
 
 request = (method,resource,data,cb) ->
   console.log method+" "+resource+" "+JSON.stringify( data,null,2 ) if process.env.DEBUG
@@ -15,6 +16,7 @@ request = (method,resource,data,cb) ->
   options.body = JSON.stringify data if data
   fetch 'http://localhost:1337'+resource, options
   .then (res,err) -> 
+    console.log "responsetime: "+res.headers.get 'x-response-time'
     console.dir err if err
     res.json()
   .then (json,err) ->
@@ -55,6 +57,7 @@ t.test 'tests done', (next) ->
     console.log "\nERROR: some tests failed\n"
     process.exit 1
 
+flowee.use responsetime()
 flowee.init {model:model, store:true }
 flowee.start (server,router) ->
   port = process.env.PORT || 1337
