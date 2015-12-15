@@ -56,7 +56,7 @@ t.test 'tests done', (next) ->
     process.exit 1
 
 flowee.init {model:model, store:true }
-flowee.start model, (server) ->
+flowee.start (server,router) ->
   port = process.env.PORT || 1337
   console.log "starting flowee at port %s",port
   server.listen port

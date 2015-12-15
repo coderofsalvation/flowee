@@ -73,9 +73,8 @@ module.exports = ( () =>
     else throw new Error("NO_FLOWEE_MODEL_GIVEN")
 
 
-  @start = (model,cb) ->
+  @start = (cb) ->
     me = @
-    @init_router model
     _start = () ->
       server = http.createServer (req,res) -> me.process.apply({},arguments)
       cb(server,me.router)

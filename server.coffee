@@ -13,7 +13,7 @@ flowee.use ratelimit
     #    rate: 0   # unlimite
 
 flowee.init {model:model, store:true }
-flowee.start model,(server,router) ->
+flowee.start (server,router) ->
   port = process.env.PORT || 1337
   console.log "starting flowee at port %s",port
 
