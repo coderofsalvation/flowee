@@ -12,9 +12,9 @@ a __lightweight__ way to __create JSONAPI__-compatible api's using _nodejs_:
 __Create `server.js`:__
 
     var flowee = require('flowee')
-    var model = require('./model.js');
   
-    flowee.start(model, function(server, router) {
+    flowee.init({ model: require('./model.js'), store: true });
+    flowee.start( function(server, router) {
       return server.listen(1337);
     });
 
