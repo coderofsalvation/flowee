@@ -13,7 +13,7 @@
 <h2>
 <a id="user-content-flowee" class="anchor" href="#flowee" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flowee</h2>
 
-<p>a <strong>lightweight</strong> way to <strong>create JSONAPI</strong>-compatible api's using <em>nodejs</em>:</p>
+<p>a <strong>lightweight</strong> way to <strong>create JSONAPI</strong>-compatible api's using <em>nodejs</em> &amp; <em>fortunejs</em></p>
 
 <h2>
 <a id="user-content-getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h2>
@@ -25,9 +25,9 @@ $ cp node_modules/flowee/test/model.js .
 <p><strong>Create <code>server.js</code>:</strong></p>
 
 <pre><code>var flowee = require('flowee')
-var model = require('./model.js');
 
-flowee.start(model, function(server, router) {
+flowee.init({ model: require('./model.js'), store: true });
+flowee.start( function(server, router) {
   return server.listen(1337);
 });
 </code></pre>
@@ -61,23 +61,28 @@ flowee.start(model, function(server, router) {
 <h2>
 <a id="user-content-features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
 
+<p>Built on the shoulders of <a href="http://fortunejs.com/">fortunejs</a>, which represents:</p>
+
 <ul>
 <li>fast installation: core is +/- 10M</li>
-<li>built on the shoulders of <a href="http://fortunejs.com/">fortunejs</a> for automatic <strong>json 2 relational database</strong> mapping</li>
-<li>
-<a href="http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger">DDA</a>: design-driven api by using a json model </li>
+<li>a teaspoon of automatic <strong>json 2 database</strong> mapping.</li>
+<li>5 liters of <a href="http://jsonapi.org/">JSONAPI v1</a> compatible REST responses </li>
+<li>swappable database adapters like <a href="https://www.npmjs.com/package/fortune-mongodb">MongoDB</a>, <a href="https://www.npmjs.com/package/fortune-postgres">Postgres</a>, <a href="https://www.npmjs.com/package/fortune-redis">Redis</a> adapter</li>
+</ul>
+
+<p>On top of that:</p>
+
+<ul>
 <li>
 <strong>SWAGGER v2</strong> compatible json model</li>
 <li>
-<a href="http://jsonapi.org/">JSONAPI v1</a> compatible</li>
+<a href="http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger">DDA</a>: design-driven api by using a json model </li>
 <li>
 <strong>middleware compatible</strong>: connect <a href="http://expressjs.com">express</a> and <a href="http://restify.com">restify</a> middleware modules from npm</li>
-<li>by default <em>Flowee</em> runs out of the box using <strong>NeDB</strong>, a <strong>mongodb</strong>-ish disk-persistent memory db</li>
-<li>database adapter swappable with <a href="https://www.npmjs.com/package/fortune-mongodb">MongoDB</a>, <a href="https://www.npmjs.com/package/fortune-postgres">Postgres</a>, <a href="https://www.npmjs.com/package/fortune-redis">Redis</a> adapter</li>
 </ul>
 
 <h2>
-<a id="user-content-why--philosophy" class="anchor" href="#why--philosophy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why / Philosophy</h2>
+<a id="user-content-philosophy" class="anchor" href="#philosophy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Philosophy</h2>
 
 <p>Take a look at <a href="http://blog.jeffdouglas.com/2015/07/07/roll-your-own-api-vs-loopback">loopback</a>, <a href="http://meteor.com">meteor</a>, <a href="http://cleverstack.io">cleverstack</a>. 
 Now imagine lightweight.
@@ -91,7 +96,7 @@ Flowee likes to focus on:</p>
 <li>no cli tools, just code: build and understand your own cli tools</li>
 </ul>
 <center>
-  generated at Tue Dec 15 20:12:43 CET 2015
+  generated at Tue Dec 15 22:41:46 CET 2015
 </center>
 </body>
 </html>
