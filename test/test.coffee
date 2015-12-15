@@ -1,5 +1,4 @@
 fetch = require 'node-fetch'
-async = require 'async'
 flowee = require './../index.coffee'
 model  = require './model.coffee'
 nedb   = require 'fortune-nedb'
