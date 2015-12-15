@@ -1,10 +1,10 @@
 #!/bin/bash
 
-content="$(curl -s -L "https://raw.githubusercontent.com/coderofsalvation/flowee/master/README.md" | ./markdown )"
+content="$(curl -s -L "https://raw.githubusercontent.com/coderofsalvation/flowee/master/README.md" | grep -v 'Build Status' | ./markdown )"
 printf "$(node_modules/.bin/brown template.html package.json)" "$content" "$(date)" > index.html
 
 for file in src/*; do 
   out="${file/.md/.html}"; out="${out/src/doc}"
   printf "compiling %-40s -> %-20s\n" "'$file'" "'$out'"
-  printf "$(node_modules/.bin/brown template.html package.json)" "$(<"$file")" "$(date)" > "$out"
+  printf "$(node_modules/.bin/brown template.html package.json)" "$(cat "$file" | ./markdown)" "$(date)" > "$out"
 done
