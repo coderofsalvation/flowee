@@ -6,11 +6,14 @@ module.exports = ( () =>
   http_router = require 'http-router'
   verbosity   = 1
   me          = @
+  @response    = { "jsonapi": { "version": "1.0" }, errors:[] }
 
   @model      = false
   @store      = false
   @router     = false 
   @middleware = []
+
+  @clone      = (o) -> JSON.parse JSON.stringify o
 
   ###
   # setup middleware iterator
@@ -21,11 +24,18 @@ module.exports = ( () =>
 
   @process = (req,res) ->
     i=0
-    next = () ->
-      if me.middleware[++i]? 
+    next = (err) ->
+      if me.middleware[++i]? and not err?
         me.middleware[i](req,res,next)
       else 
-        res.end()
+        if err
+          obj = me.clone me.response 
+          obj.errors.push 
+            "title":err.toString()
+            "code": (if err.status? then err.status else 1) 
+          res.end JSON.stringify(obj)
+        else
+          res.end()
     me.middleware[i](req,res,next)
 
   ###

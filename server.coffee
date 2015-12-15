@@ -1,8 +1,18 @@
 flowee = require './index.coffee'
-nedb   = require 'fortune-nedb'
-model  = require('./test/model.coffee')
+nedb      = require 'fortune-nedb'
+model     = require('./test/model.coffee')
+ratelimit = require('ratelimit-middleware');
 
-flowee.init_store model # let fortunejs take care of db-stuff
+flowee.use ratelimit
+    burst: 10  # Max 10 concurrent requests (if tokens) 
+    rate: 0.5  # Steady state: 1 request / 2 seconds 
+    ip: true,  # throttle per IP
+    #overrides: 
+    #  '192.168.1.1':
+    #    burst: 0
+    #    rate: 0   # unlimite
+
+flowee.init {model:model, store:true }
 flowee.start model,(server,router) ->
   port = process.env.PORT || 1337
   console.log "starting flowee at port %s",port
