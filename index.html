@@ -13,29 +13,7 @@
 
 <p><a href="https://camo.githubusercontent.com/60752b08637ed20755e1cef2ad44597775048016/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f666c6f7765652e706e67" target="_blank"><img src="https://camo.githubusercontent.com/60752b08637ed20755e1cef2ad44597775048016/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f666c6f7765652e706e67" alt="" data-canonical-src="http://coderofsalvation.github.io/flowee/img/flowee.png" style="max-width:100%;"></a></p>
 
-<p>a <strong>lightweight</strong> way to <em>create JSONAPI-compatible api's_</em> using <em>nodejs</em>:</p>
-
-<h2>
-<a id="user-content-architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
-
-<p><a href="https://camo.githubusercontent.com/80e2d26fdea7eae50e497e06cce905cec52a720e/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f6469616772616d2e706e67" target="_blank"><img src="https://camo.githubusercontent.com/80e2d26fdea7eae50e497e06cce905cec52a720e/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f6469616772616d2e706e67" alt="" data-canonical-src="http://coderofsalvation.github.io/flowee/img/diagram.png" style="max-width:100%;"></a></p>
-
-<p>click <a href="http://coderofsalvation.github.io/flowee/img/diagram.png" target="_blank">here</a> to see the fullscreen architecture</p>
-
-<ul>
-<li>fast installation: core is +/- 10M</li>
-<li>built on the shoulders of <a href="http://fortunejs.com/">fortunejs</a> for automatic <strong>json 2 relational database</strong> mapping</li>
-<li>
-<a href="http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger">DDA</a>: design-driven api by using a json model </li>
-<li>
-<strong>SWAGGER v2</strong> compatible json model</li>
-<li>
-<a href="http://jsonapi.org/">JSONAPI v1</a> compatible</li>
-<li>
-<strong>middleware compatible</strong>: connect <a href="http://expressjs.com">express</a> and <a href="http://restify.com">restify</a> middleware modules from npm</li>
-<li>by default <em>Flowee</em> runs out of the box using <strong>NeDB</strong>, a <strong>mongodb</strong>-ish disk-persistent memory db</li>
-<li>database adapter swappable with <a href="https://www.npmjs.com/package/fortune-mongodb">MongoDB</a>, <a href="https://www.npmjs.com/package/fortune-postgres">Postgres</a>, <a href="https://www.npmjs.com/package/fortune-redis">Redis</a> adapter</li>
-</ul>
+<p>a <strong>lightweight</strong> way to <strong>create JSONAPI</strong>-compatible api's using <em>nodejs</em>:</p>
 
 <h2>
 <a id="user-content-getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h2>
@@ -64,6 +42,13 @@ flowee.start(model, function(server, router) {
 </blockquote>
 
 <h2>
+<a id="user-content-architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
+
+<p><a href="https://camo.githubusercontent.com/80e2d26fdea7eae50e497e06cce905cec52a720e/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f6469616772616d2e706e67" target="_blank"><img src="https://camo.githubusercontent.com/80e2d26fdea7eae50e497e06cce905cec52a720e/687474703a2f2f636f6465726f6673616c766174696f6e2e6769746875622e696f2f666c6f7765652f696d672f6469616772616d2e706e67" alt="" data-canonical-src="http://coderofsalvation.github.io/flowee/img/diagram.png" style="max-width:100%;"></a></p>
+
+<p>click <a href="http://coderofsalvation.github.io/flowee/img/diagram.png" target="_blank">here</a> to see the fullscreen architecture</p>
+
+<h2>
 <a id="user-content-docs" class="anchor" href="#docs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Docs</h2>
 
 <ul>
@@ -71,6 +56,24 @@ flowee.start(model, function(server, router) {
 <li><a href="https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-custom-endpoints.html">Configuring custom endpoints</a></li>
 <li><a href="https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-logic.html">Implementing logic</a></li>
 <li><a href="https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-middleware.html">Middleware</a></li>
+</ul>
+
+<h2>
+<a id="user-content-features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>fast installation: core is +/- 10M</li>
+<li>built on the shoulders of <a href="http://fortunejs.com/">fortunejs</a> for automatic <strong>json 2 relational database</strong> mapping</li>
+<li>
+<a href="http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger">DDA</a>: design-driven api by using a json model </li>
+<li>
+<strong>SWAGGER v2</strong> compatible json model</li>
+<li>
+<a href="http://jsonapi.org/">JSONAPI v1</a> compatible</li>
+<li>
+<strong>middleware compatible</strong>: connect <a href="http://expressjs.com">express</a> and <a href="http://restify.com">restify</a> middleware modules from npm</li>
+<li>by default <em>Flowee</em> runs out of the box using <strong>NeDB</strong>, a <strong>mongodb</strong>-ish disk-persistent memory db</li>
+<li>database adapter swappable with <a href="https://www.npmjs.com/package/fortune-mongodb">MongoDB</a>, <a href="https://www.npmjs.com/package/fortune-postgres">Postgres</a>, <a href="https://www.npmjs.com/package/fortune-redis">Redis</a> adapter</li>
 </ul>
 
 <h2>
@@ -89,7 +92,7 @@ Flowee likes to focus on:</p>
 </ul>
 <hr>
 <center>
-  generated at Tue Dec 15 15:41:03 CET 2015
+  generated at Tue Dec 15 15:51:21 CET 2015
 </center>
 </body>
 </html>
