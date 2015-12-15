@@ -4,6 +4,8 @@
 
 a __lightweight__ way to __create JSONAPI__-compatible api's using _nodejs_:
 
+![Build Status](https://travis-ci.org/coderofsalvation/flowee.svg?branch=master)
+
 ## Getting started
 
     $ npm install flowee
