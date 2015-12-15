@@ -15,24 +15,57 @@
 
 <p>Flowee supports express/loopback/restify compatible middleware, using the familiar <code>.use()</code> function:</p>
 
-<pre><code>flowee.use( yourmiddleware );
-
-flowee.start(....){}
+<pre><code>flowee.use( yourmiddleware );     
+flowee.init(...)      
+flowee.start(....){}  
 </code></pre>
 
-<p>Basically anything which looks like:</p>
+<p>Basically anything goes into <code>use()</code>, as long as it looks like:</p>
 
 <pre><code>function (req,res,next){
 
 }
 </code></pre>
 
+<blockquote>
+<p>NOTE: <code>flowee.init(..)</code> adds the <code>http-router</code> and fortunejs <code>store</code>-middleware. So the example will 
+first process <code>yourmiddleware</code> before processing the other middleware.</p>
+</blockquote>
+
 <h4>
 <a id="user-content-ratelimiting" class="anchor" href="#ratelimiting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ratelimiting</h4>
 
-<p>try <a href="https://www.npmjs.com/package/ratelimit-middleware">ratelimit-middleware</a></p>
+<p>Install <a href="https://www.npmjs.com/package/ratelimit-middleware">ratelimit-middleware</a></p>
+
+<pre><code>npm install ratelimit-middleware
+</code></pre>
+
+<p>and then:</p>
+
+<pre><code>ratelimit = require('ratelimit-middleware');
+
+flowee.use(ratelimit({
+  burst: 10,
+  rate: 0.5,
+  ip: true
+}));
+
+flowee.init({model: model,store: true});
+
+flowee.start( function(server, router) {
+  var port;
+  port = process.env.PORT || 1337;
+  console.log("starting flowee at port %s", port);
+  router.get('/foo', function(req, res, next) {
+    return res.end("Hello foo");
+  });
+  return server.listen(port);
+});
+</code></pre>
+
+<p>For more options see <a href="https://www.npmjs.com/package/ratelimit-middleware">ratelimit-middleware</a></p>
 <center>
-  generated at Tue Dec 15 19:00:47 CET 2015
+  generated at Tue Dec 15 20:07:56 CET 2015
 </center>
 </body>
 </html>

@@ -15,12 +15,11 @@
 
 <p>Database access can be supervised by introducing <a href="http://fortunejs.com/api/">fortunejs transformers</a>:</p>
 
-<pre><code>const errors = fortune.errors
+<pre><code>const errors = require('fortune').errors
 
-store.transformOutput(type, (context, record) =&gt; {
+flowee.store.transformOutput(type, (context, record) =&gt; {
   if (context.request.meta['Authorization'] !== 'secret')
     throw new errors.UnauthorizedError('Not allowed to view this resource.')
-
   return record
 })
 </code></pre>
@@ -65,7 +64,7 @@ flowee.start(model, function(server, router) {
   ..
 </code></pre>
 <center>
-  generated at Tue Dec 15 19:00:47 CET 2015
+  generated at Tue Dec 15 20:07:53 CET 2015
 </center>
 </body>
 </html>
