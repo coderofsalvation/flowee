@@ -41,10 +41,10 @@ __Create `server.js`:__
 
 ## Docs
 
-* [Configuring database objects (and relations)](https://cdn.rawgit.com/coderofsalvation/flowee/blob/gh-pages/doc/howto-database.html)
-* [Configuring custom endpoints](https://cdn.rawgit.com/coderofsalvation/flowee/blob/gh-pages/doc/howto-custom-endpoints.html)
-* [Implementing logic](https://cdn.rawgit.com/coderofsalvation/flowee/blob/gh-pages/doc/howto-logic.html)
-* [Middleware](https://cdn.rawgit.com/coderofsalvation/flowee/blob/gh-pages/doc/howto-middleware.html)
+* [Configuring database objects (and relations)](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-database.html)
+* [Configuring custom endpoints](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-custom-endpoints.html)
+* [Implementing logic](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-logic.html)
+* [Middleware](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-middleware.html)
 
 ## Why / Philosophy 
 
@@ -57,5 +57,4 @@ Flowee likes to focus on:
 * http framework agnostic
 * allow re-usage of middleware from http frameworks like express/restify etc
 * no cli tools, just code: build and understand your own cli tools
-
 
