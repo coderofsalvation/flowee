@@ -3,7 +3,7 @@
   sleep 2s;
   cd ../flowee.landingpage
   ./run 
-  \git add index.html
+  \git add index.html doc
   \git commit -m "update docs" 
   \git push origin gh-pages;
 }

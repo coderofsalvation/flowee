@@ -19,7 +19,7 @@ test = (callback) ->
                                                          
   '''
   console.log woof
-  run( 'coffee --nodejs --harmony ./test/test.coffee' ) (code) ->
+  run( 'rm db/* test/db/* 2>/dev/null; coffee --nodejs --harmony ./test/test.coffee' ) (code) ->
     process.exit code
 
 task 'test', 'Run all tests', ->

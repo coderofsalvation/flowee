@@ -2,12 +2,10 @@ fetch = require 'node-fetch'
 async = require 'async'
 flowee = require './../index.coffee'
 model  = require './model.coffee'
+nedb   = require 'fortune-nedb'
 name = "foo-"+new Date()
+t      = require './tester.coffee'
 
-error = (msg) -> 
-  console.error "ERROR: name not found"
-  process.exit(1)
-  
 request = (method,resource,data,cb) ->
   console.log method+" "+resource+" "+JSON.stringify( data,null,2 ) if process.env.DEBUG
   options = 
@@ -18,37 +16,49 @@ request = (method,resource,data,cb) ->
   options.body = JSON.stringify data if data
   fetch 'http://localhost:1337'+resource, options
   .then (res,err) -> 
-    console.dir err
+    console.dir err if err
     res.json()
   .then (json,err) ->
     console.log JSON.stringify( json,null,2 ) if process.env.DEBUG
     cb(json)
+  
 
+t.test 'posting user', (next) ->
+  request 'POST', '/user', 
+    data:
+      type: "user"
+      attributes:
+        name: name 
+  , (json) ->
+    next()
+
+t.test 'requesting users', (next) ->      
+  request 'GET', '/user', false, (json) ->
+    if json.data[0].attributes.name != name 
+      t.error "name not found"
+    next()
+
+t.test 'fortune collections', (next) ->
+  request 'GET', '/collections', false, (json) ->
+    t.error "collections not found" if not json.links.users or not json.links.posts
+    next()
+
+t.test 'router hello world', (next) ->
+  request 'GET', '/', false, (json) ->
+    t.error "hello world not found" if json.msg is not 'Hello world'
+    next()
+
+t.test 'tests done', (next) ->
+  if not t.errors
+    console.log "\nOK\n"
+    process.exit 0 
+  else
+    console.log "\nERROR: some tests failed\n"
+    process.exit 1
+
+flowee.init {model:model, store:true }
 flowee.start model, (server) ->
   port = process.env.PORT || 1337
   console.log "starting flowee at port %s",port
   server.listen port
-
-  tests = {}
-
-  tests['posting user'] = (next) ->
-    request 'POST', '/user', 
-      data:
-        type: "user"
-        attributes:
-          name: name 
-    , (json) ->
-      next()
-
-  tests['requesting users'] = (next) ->      
-    request 'GET', '/user', false, (json) ->
-      console.dir json
-      if json.data[0].attributes.name != name 
-        error "name not found"
-      next()
-
-  tests['tests done'] = (next) ->
-    console.log "OK"
-    process.exit 0
-
-  async.series tests
+  t.run()

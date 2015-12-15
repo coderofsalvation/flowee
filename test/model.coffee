@@ -23,7 +23,7 @@ module.exports =
         dbPath: __dirname+"/db"
     }
   paths:
-    '/': 
+    '/foo': 
       'get':
         'description': 'Returns all owners from the system that the user has access to'
         'produces': [ 'application/json' ]
@@ -33,9 +33,9 @@ module.exports =
             'type': 'array'
             'items': '$ref': '#/definitions/user'
         func: (req,res,next) ->
-          res.write('Hello world')
+          res.write('{"msg":"Hello world"}')
           res.end()
-          next()
+          next() 
   definitions: 
     user:
       name:

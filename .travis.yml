@@ -1,2 +1,9 @@
-install: true
-script: ./testrun
+language: node_js
+before_script:
+  - npm install coffee-script
+node_js:
+- "4.1"
+- "4.0"
+- "0.12"
+- "iojs"
+

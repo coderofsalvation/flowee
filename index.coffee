@@ -3,11 +3,11 @@ module.exports = ( () =>
   http        = require('http')
   fortune     = require 'fortune'
   jsonapi     = require 'fortune-json-api'
-  nedb        = require 'fortune-nedb'
   http_router = require 'http-router'
   verbosity   = 1
   me          = @
 
+  @model      = false
   @store      = false
   @router     = false 
   @middleware = []
@@ -22,7 +22,7 @@ module.exports = ( () =>
   @process = (req,res) ->
     i=0
     next = () ->
-      if me.middleware[++i]?
+      if me.middleware[++i]? 
         me.middleware[i](req,res,next)
       else 
         res.end()
@@ -40,7 +40,7 @@ module.exports = ( () =>
 
     listener = fortune.net.http( @store, { endResponse: false })
     @middleware.push (req, res, next) ->
-      req.url = req.url.replace(/\/api/,'')
+      req.url = req.url.replace(/^\/collections$/,'/')
       return listener(req, res).then (response) ->
         res.write response.payload
         res.end()
@@ -55,13 +55,24 @@ module.exports = ( () =>
     @middleware.push (req,res,next) ->
       next() if not me.router.route(req, res)
 
+  @init = (opts) ->
+    if opts.model? 
+      @model = opts.model
+      @init_router opts.model
+      @init_store opts.model if opts.store
+    else throw new Error("NO_FLOWEE_MODEL_GIVEN")
+
+
   @start = (model,cb) ->
     me = @
     @init_router model
-    store = @init_store(model)
-    store.connect().then () ->
+    _start = () ->
       server = http.createServer (req,res) -> me.process.apply({},arguments)
       cb(server,me.router)
+    if me.store
+      me.store.connect().then _start
+    else 
+      _start()
   
   @[func] = @[func].bind(@) for func,v of @ when typeof v is 'function'
 
