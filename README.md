@@ -4,8 +4,6 @@
 
 a __lightweight__ way to __create JSONAPI__-compatible api's using _nodejs_:
 
-***
-
 ## Getting started
 
     $ npm install flowee
@@ -26,15 +24,11 @@ __Create `server.js`:__
 
 > Voila! Now you have a server running with automatically mapped database entities (incl. __many to many__ relations OHMY).
 
-***
-
 ## Architecture
 
 ![](http://coderofsalvation.github.io/flowee/img/diagram.png)
 
 click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target="_blank">here</a> to see the fullscreen architecture
-
-***
 
 ## Docs
 
@@ -42,8 +36,6 @@ click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target=
 * [Configuring custom endpoints](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-custom-endpoints.html)
 * [Implementing logic](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-logic.html)
 * [Middleware](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-middleware.html)
-
-***
 
 ## Features
 
@@ -56,7 +48,6 @@ click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target=
 * by default *Flowee* runs out of the box using __NeDB__, a __mongodb__-ish disk-persistent memory db
 * database adapter swappable with [MongoDB](https://www.npmjs.com/package/fortune-mongodb), [Postgres](https://www.npmjs.com/package/fortune-postgres), [Redis](https://www.npmjs.com/package/fortune-redis) adapter
 
-***
 
 ## Why / Philosophy 
 
