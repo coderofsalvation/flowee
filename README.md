@@ -1,6 +1,4 @@
-# Flowee
-
-![](http://coderofsalvation.github.io/flowee/img/flowee.png)
+## Flowee
 
 a __lightweight__ way to __create JSONAPI__-compatible api's using _nodejs_:
 
@@ -34,10 +32,10 @@ click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target=
 
 ## Docs
 
-* [Configuring database objects (and relations)](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-database.html)
-* [Configuring custom endpoints](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-custom-endpoints.html)
-* [Implementing logic](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-logic.html)
-* [Middleware](https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/doc/howto-middleware.html)
+* [Configuring database objects (and relations)](http://flowee.isvery.ninja/doc/howto-database.html)
+* [Configuring custom endpoints](http://flowee.isvery.ninja/doc/howto-custom-endpoints.html)
+* [Implementing logic](http://flowee.isvery.ninja/doc/howto-logic.html)
+* [Middleware](http://flowee.isvery.ninja/doc/howto-middleware.html)
 
 ## Features
 
@@ -62,6 +60,7 @@ Flowee likes to focus on:
 * http framework agnostic
 * allow re-usage of middleware from http frameworks like express/restify etc
 * no cli tools, just code: build and understand your own cli tools
+
 
 
 
