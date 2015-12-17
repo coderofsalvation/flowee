@@ -17,11 +17,6 @@ module.exports =
       type: 'fortune-json-api'
       options: {}
     }]
-    adapter: { 
-      type: 'fortune-nedb'
-      options:
-        dbPath: __dirname+"/db"
-    }
   paths:
     '/foo': 
       'get':
