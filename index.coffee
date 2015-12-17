@@ -20,6 +20,8 @@ module.exports = ( () ->
 
   @clone      = (o) -> JSON.parse JSON.stringify o
 
+  @json2text  = (json,prefix="") -> JSON.stringify(json,null,2).replace(/[{}\]\["']+/g,'').trim().replace(/^/gm,prefix)
+
   ###
   # setup middleware iterator
   ###
@@ -30,6 +32,7 @@ module.exports = ( () ->
   @process = (req,res) ->
     i=0
     req.originalUrl = req.url
+    req.flowee = @
     res[k] = helper.bind(res) for k,helper of me.helpers.res
     next = (err) ->
       if me.middleware[++i]? and not err?
@@ -59,31 +62,31 @@ module.exports = ( () ->
         @end()
 
   ###
-  # setup fortunejs store (serializers and adapter)
+  # setup middleware: fortunejs store (serializers and adapter) 
   ###
 
   @init_db = (model) ->
-    if model.fortunejs.adapter?
+    if model.flowee.fortunejs.adapter?
       console.log "db> adapter configuration found in model" if @verbosity > 0
     else
       console.log "db> adapter not configured in model..detecting adapter" if @verbosity > 0
       done = (name,notes) -> 
-        console.log "db> "+name+" found, injecting default config to `model.fortunejs.adapter` :"
-        console.log JSON.stringify model.fortunejs.adapter,null,2 if me.verbosity > 0
-        console.log "db> NOTE: "+notes if notes?
+        console.log "db> "+name+" found, injecting default config to `model.flowee.fortunejs.adapter` :"
+        console.log me.json2text( model.flowee.fortunejs.adapter, "db> " ) if me.verbosity > 0
+        #console.log "db> NOTE: "+notes if notes?
       try
         require 'fortune-nedb'
-        model.fortunejs.adapter =
+        model.flowee.fortunejs.adapter =
           type: "fortune-nedb"
           options:
-            dbPath: ( process.env.DATA_DIR || __dirname+"/db" )
-        return done("nedb","set environment variable 'DATA_DIR' to specify alternative datapath")
-      catch
+            dbPath: ( process.env.DATA_DIR || @model.flowee.dataPath+"/db" )
+        return done("nedb")
+      catch e
         console.log "db> no nedb detected"
 
       try
         require 'fortune-mongodb'
-        model.fortunejs.adapter =
+        model.flowee.fortunejs.adapter =
           type: "fortune-mongodb"
           options:
             url: 'mongodb>//localhost:27017/test'
@@ -93,7 +96,7 @@ module.exports = ( () ->
       
       try
         require 'fortune-postgres'
-        model.fortunejs.adapter =
+        model.flowee.fortunejs.adapter =
           type: "fortune-postgres"
           options:
             url: "postgres://test:pass@localhost:3360/testdb"
@@ -103,7 +106,7 @@ module.exports = ( () ->
       
       try
         require 'fortune-redis'
-        model.fortunejs.adapter =
+        model.flowee.fortunejs.adapter =
           type: "fortune-redis"
         return done("redis")
       catch
@@ -114,9 +117,9 @@ module.exports = ( () ->
 
   @init_store = (model) ->
     @init_db model
-    serializer.type = require serializer.type for serializer in model.fortunejs.serializers
-    model.fortunejs.adapter.type = require model.fortunejs.adapter.type if model.fortunejs.adapter?
-    @store = @fortune model.fortunejs
+    serializer.type = require serializer.type for serializer in model.flowee.fortunejs.serializers
+    model.flowee.fortunejs.adapter.type = require model.flowee.fortunejs.adapter.type if model.flowee.fortunejs.adapter?
+    @store = @fortune model.flowee.fortunejs
     @store.defineType entityname, entity.schema for entityname,entity of model.definitions
 
     listener = fortune.net.http( @store, { endResponse: false })
@@ -129,6 +132,10 @@ module.exports = ( () ->
         next() // save the response somewhere, then call next
       .catch(next)
     @store
+  
+  ###
+  # setup middleware: http router 
+  ###
 
   @init_router = (model) ->
     @router = http_router.createRouter()
@@ -147,10 +154,59 @@ module.exports = ( () ->
     @emit 'init', @
     @router
 
+  @export_swagger = (model) ->
+    for entityname,entity of model.definitions
+      properties = {}
+      for propertyname,property of entity.schema
+        p = properties[propertyname] = {}
+        p.type = "string" if property.type is String
+        if property.isArray? and property.isArray
+          p.type = "array" 
+
+      model.paths[ "/"+entityname ] = path = {}
+      path.get =
+        'description': 'Returns a collection of '+entityname+' objects from the database'
+        'produces': [ 'application/vnd.api+json' ]
+        'responses': '200':
+          'description': 'A collection of '+entityname+' objects'
+          'schema':
+            'type': 'array'
+            items: [ { type: "object", properties:properties } ]
+      
+      model.paths[ "/"+entityname+"/:id" ] = path = {}
+      path.get =
+        'description': 'Returns a '+entityname+' object from the database'
+        'produces': [ 'application/vnd.api+json' ]
+        'responses': '200':
+          'description': 'A '+entityname+' object'
+          'schema': { type: "object", properties:properties }
+
+      model.paths[ "/"+entityname ] = path = {}
+      path.post =
+        'description': 'Creates a '+entityname+' object'
+        'produces': [ 'application/vnd.api+json' ]
+        'responses': '200':
+          'description': 'A '+entityname+' object'
+          'schema': { type: "object", properties:properties }
+      
+      model.paths[ "/"+entityname+"/:id" ] = path = {}
+      path.post =
+        'description': 'Updates a '+entityname+' object'
+        'produces': [ 'application/vnd.api+json' ]
+        'responses': '200':
+          'description': 'A '+entityname+' object'
+          'schema':
+            'type': 'object'
+            properties: properties
+
+    if model.flowee.model.write 
+      console.log "writing generated model to `"+model.flowee.dataPath+model.flowee.model.file+"`"
+      require("fs").writeFileSync model.flowee.dataPath+model.flowee.model.file, JSON.stringify(model,null,2)
 
   @start = (cb) ->
     me = @
     _start = () ->
+      me.export_swagger(me.model)
       server = http.createServer (req,res) -> me.process.apply({},arguments)
       cb(server)
       me.emit 'start', me

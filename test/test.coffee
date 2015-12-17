@@ -13,7 +13,7 @@ t.test 'posting user', (next) ->
       attributes:
         name: name 
   , (json) ->
-    next()
+    #next()
 
 t.test 'requesting users', (next) ->      
   request 'GET', '/user', false, (json) ->
@@ -32,8 +32,8 @@ t.test 'router hello world', (next) ->
     next()
 
 flowee.use responsetime()
-flowee.init {model:model, store:true }
-flowee.start (server,router) ->
+app = flowee.init {model:model, store:true }
+flowee.start (server) ->
   port = process.env.PORT || 1337
   console.log "starting flowee at port %s",port
   server.listen port

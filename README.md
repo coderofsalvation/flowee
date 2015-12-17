@@ -28,13 +28,13 @@ __Create `server.js`:__
 
 ![](http://coderofsalvation.github.io/flowee/img/diagram.png)
 
-click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target="_blank">here</a> to see the fullscreen architecture
+__Flowee__ promotes [configuration over convention](http://flowee.isvery.ninja/doc/howto-configuration-over-convention), click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target="_blank">here</a> to see the fullscreen architecture
 
 ## Howtos
 
-* [Configuring database objects (and relations)](http://flowee.isvery.ninja/doc/howto-database.html)
-* [Configuring custom endpoints](http://flowee.isvery.ninja/doc/howto-custom-endpoints.html)
-* [Implementing logic](http://flowee.isvery.ninja/doc/howto-logic.html)
+* [I want a database structure)](http://flowee.isvery.ninja/doc/howto-database.html)
+* [I want custom endpoints](http://flowee.isvery.ninja/doc/howto-custom-endpoints.html)
+* [I want to implementing logic](http://flowee.isvery.ninja/doc/howto-logic.html)
 * [Middleware](http://flowee.isvery.ninja/doc/howto-middleware.html)
 
 ## Features
@@ -42,13 +42,14 @@ click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target=
 Built on the shoulders of [fortunejs](http://fortunejs.com/), which represents:
 
 * fast installation: core is +/- 10M
-* a teaspoon of automatic __json 2 database__ mapping.
+* [configuration over convention](http://flowee.isvery.ninja/doc/howto-configuration-over-convention)
+* a teaspoon of automatic database object relations mappings 
 * 5 liters of [JSONAPI v1](http://jsonapi.org/) compatible REST responses 
 * swappable database adapters like [MongoDB](https://www.npmjs.com/package/fortune-mongodb), [Postgres](https://www.npmjs.com/package/fortune-postgres), [Redis](https://www.npmjs.com/package/fortune-redis) adapter
 
 ## Oh and on top of that:
 
-* __SWAGGER v2__ compatible json model
+* __SWAGGER v2__ compatible 
 * [DDA](http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger): design-driven api by using a json model 
 * __middleware compatible__: connect [express](http://expressjs.com) and [restify](http://restify.com) middleware modules from npm
 
@@ -60,10 +61,11 @@ Now imagine lightweight.
 Flowee likes to focus on:
 
 * lightweight and fast to install
-* json driven instead of frameworkspecific (file)conventions
+* json driven, declarative (monkeypatchable configuration over convention)
 * http framework agnostic
+* [configuration over convention](http://flowee.isvery.ninja/doc/howto-configuration-over-convention)
 * allow re-usage of middleware from http frameworks like express/restify etc
-* no cli tools, just code: build and understand your own cli tools
+* extend using npm installs: no cli tools, no learningcurve
 
 
 
