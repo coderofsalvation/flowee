@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>flowee</title>
+<link rel="stylesheet" href="https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/css/air.css">
+</head>
+<body>
+
+<a href="https://github.com/coderofsalvation/flowee#readme"><img style="max-width:none; position: absolute; top: 0; left: 0; border: 0;border-radius:0; height:auto;width:auto;" src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"></a>
+<a href="/"><img alt="" src="http://flowee.isvery.ninja/img/flowee.png"/></a>
+<hr>
+<h2>
+<a id="user-content-howto-database-entities--relations" class="anchor" href="#howto-database-entities--relations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Howto: Database entities &amp; relations</h2>
+
+<blockquote>
+<p>Powered by <strong>fortunejs</strong>, we don't need to worry about ORM-stuff by simply defining database entities in the <a href="https://github.com/coderofsalvation/flowee/blob/master/test/model.js">jsonmodel</a>.</p>
+</blockquote>
+
+<p>Flowee runs in memory by default, and automatically detects databases when installed.</p>
+
+<h2>
+<a id="user-content-database-structure" class="anchor" href="#database-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Database structure</h2>
+
+<p>The <code>definitions</code> field in the <a href="https://github.com/coderofsalvation/flowee/blob/master/test/model.js">jsonmodel</a> allows you to define entities and their relationships:</p>
+
+<pre><code>...
+
+definitions: {          &lt;-- here the database entities are defined
+  user: {               &lt;-- name of the entity, this translates to api endpoint '/user' and '/user:id'
+    name: {             &lt;-- attribute 
+      type: String      &lt;-- type of the attribute
+
+...
+</code></pre>
+
+<p>It uses the <strong>fortunejs</strong> <code>defineType</code> format: see docs at <a href="http://fortunejs.com/">fortunejs</a></p>
+
+<p>Each entity will automatically expose the following REST-endpoints during <code>flowee.init()</code> :</p>
+
+<ul>
+<li>GET /user</li>
+<li>POST /user</li>
+<li>GET /user/:id</li>
+<li>PUT /user:id</li>
+<li>DELETE /user:id</li>
+</ul>
+
+<p>Just look at <code>./model.generated.json</code> in the <code>/path</code>-field after running flowee.
+Or do a <code>GET /model</code> request.</p>
+
+<blockquote>
+<p>Important: make sure to do request with the <code>Content-Type: application/vnd.api+json</code> http header.</p>
+</blockquote>
+
+<h2>
+<a id="user-content-want-memory-to-persist-on-disk" class="anchor" href="#want-memory-to-persist-on-disk" aria-hidden="true"><span class="octicon octicon-link"></span></a>Want memory to persist on disk?</h2>
+
+<pre><code>npm install fortune-nedb 
+</code></pre>
+
+<h2>
+<a id="user-content-prefer-a-nosql-db" class="anchor" href="#prefer-a-nosql-db" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prefer a noSQL db?</h2>
+
+<pre><code>npm install fortune-mongodb 
+</code></pre>
+
+<p>or 
+    npm install fortune-redis </p>
+
+<h2>
+<a id="user-content-or-a-spoon-of-relational-db" class="anchor" href="#or-a-spoon-of-relational-db" aria-hidden="true"><span class="octicon octicon-link"></span></a>Or a spoon of relational db?</h2>
+
+<pre><code>npm install fortune-postgres
+</code></pre>
+
+<h2>
+<a id="user-content-configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>Databases are automatically configured by monkeypatching the generated model with default settings.</p>
+
+<blockquote>
+<p>Just look at <code>./model.generated.json</code> in the <code>adapter</code>-field after running flowee.
+Or do a <code>GET /model</code> request.</p>
+</blockquote>
+
+<p>Copy/paste/modify the <code>adapter</code>-settings into your model.</p>
+<center>
+  generated at Fri Dec 18 00:37:47 CET 2015
+</center>
+</body>
+</html>

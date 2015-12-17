@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>flowee</title>
+<link rel="stylesheet" href="https://cdn.rawgit.com/coderofsalvation/flowee/gh-pages/css/air.css">
+</head>
+<body>
+
+<a href="https://github.com/coderofsalvation/flowee#readme"><img style="max-width:none; position: absolute; top: 0; left: 0; border: 0;border-radius:0; height:auto;width:auto;" src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"></a>
+<a href="/"><img alt="" src="http://flowee.isvery.ninja/img/flowee.png"/></a>
+<hr>
+<h2>
+<a id="user-content-howto-custom-endpoints" class="anchor" href="#howto-custom-endpoints" aria-hidden="true"><span class="octicon octicon-link"></span></a>Howto: custom endpoints</h2>
+
+<p>This can be done using the app object:</p>
+
+<pre><code>  var app = flowee.init({model: model, store:true })
+
+  app.get( '/', function(req,res,next){
+    res.json({foo:true});
+    // res.json(null, [ new Error("foo happened") ] );
+    next()
+  })
+
+  flowee.start(...)
+</code></pre>
+
+<p>Or directly using <code>definitions</code> field in the <a href="https://github.com/coderofsalvation/flowee/blob/master/test/model.js">jsonmodel</a> defines the entities and their relationships:</p>
+
+<pre><code>  }
+},
+paths: {
+  '/': {                                                   &lt;-- endpoint path 
+    'get': {
+      'public':true,
+      'description': 'returns hello world', 
+      'produces': ['application/json'],
+      'responses': {
+        '200': {
+          'description': 'A list of owners.',              &lt;-- useful for generated
+          'schema': {                                      &lt;-- documentation
+            'type': 'object',                              &lt;--
+            'properties':{
+              'msg': {'type':"string"}
+            }
+          }
+        }
+      },
+      func: function(req, res, next) {                     &lt;-- endpoint function
+        res.write('{"msg":"Hello world"}');
+        res.end();
+        return next();
+</code></pre>
+<center>
+  generated at Fri Dec 18 00:37:46 CET 2015
+</center>
+</body>
+</html>
