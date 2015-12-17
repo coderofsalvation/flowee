@@ -1,24 +1,27 @@
 ## Howto: custom endpoints
 
-This can be done using the router object :
+This can be done using the app object:
 
 
-    flowee.start(model, function(server, router) {
+      var app = flowee.init({model: model, store:true })
+        
+      app.get( '/', function(req,res,next){
+        res.json({foo:true});
+        // res.json(null, [ new Error("foo happened") ] );
+        next()
+      })
 
-      router.get('/foo', function(req, res, next) {          // <--
-        return res.end('{"msg":"Hello foo"}');               // <--
-      });                                                    // <--
+      flowee.start(...)
 
-      server.listen(port);
-
-Or directly using `definitions` field in the __SWAGGER__ jsonmodel defines the entities and their relationships:
+Or directly using `definitions` field in the [jsonmodel](https://github.com/coderofsalvation/flowee/blob/master/test/model.js) defines the entities and their relationships:
 
       }
     },
     paths: {
       '/': {                                                   <-- endpoint path 
         'get': {
-          'description': 'returns hellow world'               
+          'public':true,
+          'description': 'returns hello world', 
           'produces': ['application/json'],
           'responses': {
             '200': {
