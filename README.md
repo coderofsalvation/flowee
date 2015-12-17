@@ -13,8 +13,8 @@ __Create `server.js`:__
 
     var flowee = require('flowee')
   
-    flowee.init({ model: require('./model.js'), store: true });
-    flowee.start( function(server, router) {
+    var app = flowee.init({ model: require('./model.js'), store: true });
+    flowee.start( function(server) {
       return server.listen(1337);
     });
 
@@ -30,7 +30,7 @@ __Create `server.js`:__
 
 click <A href="http://coderofsalvation.github.io/flowee/img/diagram.png" target="_blank">here</a> to see the fullscreen architecture
 
-## Docs
+## Howtos
 
 * [Configuring database objects (and relations)](http://flowee.isvery.ninja/doc/howto-database.html)
 * [Configuring custom endpoints](http://flowee.isvery.ninja/doc/howto-custom-endpoints.html)
@@ -46,7 +46,7 @@ Built on the shoulders of [fortunejs](http://fortunejs.com/), which represents:
 * 5 liters of [JSONAPI v1](http://jsonapi.org/) compatible REST responses 
 * swappable database adapters like [MongoDB](https://www.npmjs.com/package/fortune-mongodb), [Postgres](https://www.npmjs.com/package/fortune-postgres), [Redis](https://www.npmjs.com/package/fortune-redis) adapter
 
-On top of that:
+## Oh and on top of that:
 
 * __SWAGGER v2__ compatible json model
 * [DDA](http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger): design-driven api by using a json model 

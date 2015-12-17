@@ -25,6 +25,7 @@ module.exports =
   paths:
     '/foo': 
       'get':
+        public: true
         'description': 'Returns all owners from the system that the user has access to'
         'produces': [ 'application/json' ]
         'responses': '200':
@@ -33,28 +34,35 @@ module.exports =
             'type': 'array'
             'items': '$ref': '#/definitions/user'
         func: (req,res,next) ->
-          res.write('{"msg":"Hello world"}')
-          res.end()
+          res.json {"msg":"Hello world"}
           next() 
   definitions: 
     user:
-      name:
-        type: String
-      following:
-        link: 'user'
-        inverse: 'followers'
-        isArray: true
-      followers:
-        link: 'user'
-        inverse: 'following'
-        isArray: true
-      posts:
-        link: 'post'
-        inverse: 'author'
-        isArray: true
-    post: 
-      message: 
-        type: String
-      author:
-        link: 'user'
-        inverse: 'posts'
+      schema:
+        name:
+          type: String
+        username:
+          type: String
+        password:
+          type: String
+        apitoken:
+          type: String
+        following:
+          link: 'user'
+          inverse: 'followers'
+          isArray: true
+        followers:
+          link: 'user'
+          inverse: 'following'
+          isArray: true
+        roles:
+          link: 'role'
+          inverse: 'user'
+          isArray: true
+    role: 
+      schema:
+        message: 
+          type: String
+        user:
+          link: 'user'
+          inverse: 'roles'
