@@ -62,15 +62,66 @@ module.exports = ( () ->
   # setup fortunejs store (serializers and adapter)
   ###
 
+  @init_db = (model) ->
+    if model.fortunejs.adapter?
+      console.log "db> adapter configuration found in model" if @verbosity > 0
+    else
+      console.log "db> adapter not configured in model..detecting adapter" if @verbosity > 0
+      done = (name,notes) -> 
+        console.log "db> "+name+" found, injecting default config to `model.fortunejs.adapter` :"
+        console.log JSON.stringify model.fortunejs.adapter,null,2 if me.verbosity > 0
+        console.log "db> NOTE: "+notes if notes?
+      try
+        require 'fortune-nedb'
+        model.fortunejs.adapter =
+          type: "fortune-nedb"
+          options:
+            dbPath: ( process.env.DATA_DIR || __dirname+"/db" )
+        return done("nedb","set environment variable 'DATA_DIR' to specify alternative datapath")
+      catch
+        console.log "db> no nedb detected"
+
+      try
+        require 'fortune-mongodb'
+        model.fortunejs.adapter =
+          type: "fortune-mongodb"
+          options:
+            url: 'mongodb>//localhost:27017/test'
+        return done("mongodb")
+      catch
+        console.log "db> no mongodb detected"
+      
+      try
+        require 'fortune-postgres'
+        model.fortunejs.adapter =
+          type: "fortune-postgres"
+          options:
+            url: "postgres://test:pass@localhost:3360/testdb"
+        return done("postgres")
+      catch
+        console.log "db> no postgres detected"
+      
+      try
+        require 'fortune-redis'
+        model.fortunejs.adapter =
+          type: "fortune-redis"
+        return done("redis")
+      catch
+        console.log "db> no redis detected"
+
+      console.log "db> no database adapter installed, defaulting to memory"
+
+
   @init_store = (model) ->
+    @init_db model
     serializer.type = require serializer.type for serializer in model.fortunejs.serializers
-    model.fortunejs.adapter.type = require model.fortunejs.adapter.type
+    model.fortunejs.adapter.type = require model.fortunejs.adapter.type if model.fortunejs.adapter?
     @store = @fortune model.fortunejs
     @store.defineType entityname, entity.schema for entityname,entity of model.definitions
 
     listener = fortune.net.http( @store, { endResponse: false })
     @middleware.push (req, res, next) ->
-      console.log "middleware:fortunejs" if me.verbosity > 1
+      console.log "middleware> fortunejs" if me.verbosity > 1
       req.url = req.url.replace(/^\/collections$/,'/')
       return listener(req, res).then (response) ->
         res.write response.payload
@@ -84,7 +135,7 @@ module.exports = ( () ->
     for resource,methods of model.paths
       @router[method]( resource, obj.func ) for method,obj of methods
     @middleware.push (req,res,next) ->
-      console.log "middleware:http-router" if me.verbosity > 1
+      console.log "middleware> http-router" if me.verbosity > 1
       next() if not me.router.route(req, res)
 
   @init = (opts) ->

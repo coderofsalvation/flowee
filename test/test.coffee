@@ -1,6 +1,5 @@
 flowee       = require './../index.coffee'
 model        = require './model.coffee'
-nedb         = require 'fortune-nedb'
 responsetime = require 'response-time'
 name         = "foo-"+new Date()
 request      = require './util/requester.coffee'
