@@ -47,12 +47,18 @@ Built on the shoulders of [fortunejs](http://fortunejs.com/), which represents:
 * 5 liters of [JSONAPI v1](http://jsonapi.org/) compatible REST responses 
 * swappable database adapters like [MongoDB](https://www.npmjs.com/package/fortune-mongodb), [Postgres](https://www.npmjs.com/package/fortune-postgres), [Redis](https://www.npmjs.com/package/fortune-redis) adapter
 
-## Oh and on top of that:
+Oh..and:
 
-* __SWAGGER v2__ compatible 
-* [DDA](http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger): design-driven api by using a json model 
+* [DDA](http://www.slideshare.net/apigee/i-love-apis-2015-create-designdriven-apis-with-nodejs-and-swagger): design-driven api by using a json __SWAGGER v2__ compatible model 
 * __middleware compatible__: connect [express](http://expressjs.com) and [restify](http://restify.com) middleware modules from npm
 
+## Extensions
+
+<img alt="" src="https://github.com/coderofsalvation/flowee-doc/raw/master/.doc/apiexplorer.png" height="200px"/>
+> [__flowee-doc__](https://npmjs.org/flowee-doc): automatic generating api
+
+<img alt="" src="https://pbs.twimg.com/profile_images/599259952574693376/DMrPoJtc.png" height="200px"/>
+> [__flowee-auth__](https://npmjs.org/flowee-auth): passport authentication
 
 ## Philosophy 
 

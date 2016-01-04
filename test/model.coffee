@@ -46,8 +46,10 @@ module.exports =
           'schema':
             'type': 'object'
         func: (req,res,next) ->
+          res.writeHead 200, { 'Content-Type': 'application/json' }
+          res.header
           res.end JSON.stringify req.flowee.model,null,2
-          next() 
+          next()
   definitions: 
     user:
       schema:
