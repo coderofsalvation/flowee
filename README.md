@@ -54,11 +54,15 @@ Oh..and:
 
 ## Extensions
 
-> [flowee-doc](https://npmjs.org/flowee-doc): automatic generating api
+> [flowee-doc](https://npmjs.org/flowee-doc): automatic generating api documentation
+
 <img alt="" src="https://github.com/coderofsalvation/flowee-doc/raw/master/.doc/apiexplorer.png" height="200px"/><br>
 
 > [flowee-auth](https://npmjs.org/flowee-auth): passport authentication
+
 <img alt="" src="https://pbs.twimg.com/profile_images/599259952574693376/DMrPoJtc.png" height="200px"/><br>
+
+> [flowee-admin](): automatic admin interface (__TODO__)
 
 ## Philosophy 
 
