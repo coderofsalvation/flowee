@@ -10,13 +10,18 @@ module.exports =
   'host': 'petstore.swagger.io'
   'basePath': '/api'
   'schemes': [ 'http' ]
-  'consumes': [ 'application/vnd.api+json' ]
-  'produces': [ 'application/vnd.api+json' ]
-  fortunejs:
-    serializers: [{ 
-      type: 'fortune-json-api'
-      options: {}
-    }]
+  'consumes': [ 'application/vnd.api+json', 'application/json' ]
+  'produces': [ 'application/vnd.api+json', 'application/json' ]
+  flowee:
+    model:
+      write: true 
+      file: "/model.generated.json"
+    dataPath: '.'
+    fortunejs:
+      serializers: [{ 
+        type: 'fortune-json-api'
+        options: {}
+      }]
   paths:
     '/foo': 
       'get':
@@ -30,6 +35,18 @@ module.exports =
             'items': '$ref': '#/definitions/user'
         func: (req,res,next) ->
           res.json {"msg":"Hello world"}
+          next()
+    '/model':
+      'get':
+        public: true
+        'description': 'Returns flowee (generated) model for backup or documentation purposes'
+        'produces': [ 'application/json' ]
+        'responses': '200':
+          'description': 'The flowee json model'
+          'schema':
+            'type': 'object'
+        func: (req,res,next) ->
+          res.end JSON.stringify req.flowee.model,null,2
           next() 
   definitions: 
     user:

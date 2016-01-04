@@ -4,7 +4,6 @@ responsetime = require 'response-time'
 name         = "foo-"+new Date()
 request      = require './util/requester.coffee'
 t            = require './util/tester.coffee'
-  
 
 t.test 'posting user', (next) ->
   request 'POST', '/user', 
@@ -13,7 +12,7 @@ t.test 'posting user', (next) ->
       attributes:
         name: name 
   , (json) ->
-    #next()
+    next()
 
 t.test 'requesting users', (next) ->      
   request 'GET', '/user', false, (json) ->
