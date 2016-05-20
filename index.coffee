@@ -163,7 +163,8 @@ module.exports = ( () ->
         if property.isArray? and property.isArray
           p.type = "array" 
 
-      model.paths[ "/"+entityname ] = path = {}
+      path = {}
+      model.paths[ "/"+entityname ] = path
       path.get =
         'description': 'Returns a collection of '+entityname+' objects from the database'
         'produces': [ 'application/vnd.api+json' ]
@@ -173,7 +174,16 @@ module.exports = ( () ->
             'type': 'array'
             items: [ { type: "object", properties:properties } ]
       
-      model.paths[ "/"+entityname+"/:id" ] = path = {}
+      path.post =
+        'description': 'Creates a '+entityname+' object'
+        'produces': [ 'application/vnd.api+json' ]
+        'responses': '200':
+          'description': 'A '+entityname+' object'
+          'schema': { type: "object", properties:properties }
+
+      
+      path = {}
+      model.paths[ "/"+entityname+"/:id" ] = path 
       path.get =
         'description': 'Returns a '+entityname+' object from the database'
         'produces': [ 'application/vnd.api+json' ]
@@ -181,15 +191,6 @@ module.exports = ( () ->
           'description': 'A '+entityname+' object'
           'schema': { type: "object", properties:properties }
 
-      model.paths[ "/"+entityname ] = path = {}
-      path.post =
-        'description': 'Creates a '+entityname+' object'
-        'produces': [ 'application/vnd.api+json' ]
-        'responses': '200':
-          'description': 'A '+entityname+' object'
-          'schema': { type: "object", properties:properties }
-      
-      model.paths[ "/"+entityname+"/:id" ] = path = {}
       path.post =
         'description': 'Updates a '+entityname+' object'
         'produces': [ 'application/vnd.api+json' ]
