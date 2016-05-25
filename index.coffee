@@ -191,7 +191,7 @@ module.exports = ( () ->
           'description': 'A '+entityname+' object'
           'schema': { type: "object", properties:properties }
 
-      path.post =
+      path.put =
         'description': 'Updates a '+entityname+' object'
         'produces': [ 'application/vnd.api+json' ]
         'responses': '200':

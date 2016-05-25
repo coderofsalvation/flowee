@@ -297,7 +297,7 @@
             }
           }
         };
-        path.post = {
+        path.put = {
           'description': 'Updates a ' + entityname + ' object',
           'produces': ['application/vnd.api+json'],
           'responses': {
